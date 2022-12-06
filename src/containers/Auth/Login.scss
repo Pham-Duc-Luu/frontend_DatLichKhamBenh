@@ -1,0 +1,79 @@
+.login-background {
+    height: 100vh;
+    background: linear-gradient(135deg, rgba(34, 193, 195, 1) 0%, rgba(253, 187, 45, 1) 100%);
+
+    .login-container {
+        margin: 12px auto;
+        border-radius: 10px;
+        width: 300px;
+        background-color: white;
+        // height: 100%;
+        padding: 20px;
+        position: absolute;
+        top: 0;
+        right: 0;
+        left: 0;
+        bottom: 0;
+        height: 500px;
+
+        .login-title {
+            font-size: 40px;
+            font-weight: 600;
+        }
+
+        .login-Username {
+            .login-username-box {
+                position: relative;
+
+                // padding: 0;
+                input {
+                }
+
+                i {
+                    // height: 100%;
+                    position: absolute;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    right: 12px;
+                }
+            }
+
+            label {
+                margin: 12px;
+                font-size: 16px;
+                font-weight: 600;
+                opacity: 0.6;
+            }
+        }
+
+        .login-btn {
+            margin: 20px 0;
+
+            button {
+                width: 100%;
+                padding: 4px;
+                border: none;
+                border-radius: 100px;
+                font-size: 16px;
+                font-weight: 600;
+                color: white;
+                background: linear-gradient(135deg, rgba(34, 193, 195, 1) 0%, rgba(253, 187, 45, 1) 100%);
+            }
+        }
+
+        .login-forgot {
+            font-size: 12px;
+        }
+
+        .login-other {
+            margin: 12px 0;
+        }
+
+        .login-other-icon {
+            display: flex;
+            font-size: 30px;
+            justify-content: space-around;
+            align-items: center;
+        }
+    }
+}
