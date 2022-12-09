@@ -84,7 +84,7 @@ class Login extends Component {
                                 }}
                             />
                             <i
-                                class="fas fa-eye-slash"
+                                className="fas fa-eye-slash"
                                 onClick={() => {
                                     this.setState({ hidden: !this.state.hidden });
                                 }}
@@ -110,8 +110,8 @@ class Login extends Component {
                         <span>Or login with</span>
                     </div>
                     <div className="col-12 login-other-icon">
-                        <i class="fab fa-facebook-f"></i>
-                        <i class="fab fa-google"></i>
+                        <i className="fab fa-facebook-f"></i>
+                        <i className="fab fa-google"></i>
                     </div>
                 </div>
             </div>
