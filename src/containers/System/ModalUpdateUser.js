@@ -12,25 +12,28 @@ class UserAddUser extends Component {
             lastName: '',
             firstName: '',
             address: '',
-            password: '',
             gender: 0,
             roleId: 0,
-            rePassword: '',
-            emailErr: '',
             phoneNumberErr: '',
             lastNameErr: '',
             firstNameErr: '',
             addressErr: '',
-            passwordErr: '',
-            rePasswordErr: '',
-            genderErr: '',
-            roleIdErr: '',
-            showPassword: false,
-            showRepassword: false,
         };
     }
 
-    componentDidMount() {}
+    componentDidMount() {
+        console.log(this.props.userInfo);
+
+        this.setState({
+            email: this.props.userInfo.email,
+            phoneNumber: this.props.userInfo.phoneNumber,
+            lastName: this.props.userInfo.lastName,
+            firstName: this.props.userInfo.firstName,
+            address: this.props.userInfo.address,
+            gender: this.props.userInfo.gender,
+            roleId: this.props.userInfo.roleId,
+        });
+    }
 
     toggle = () => {
         this.props.toggleModal();
@@ -42,25 +45,6 @@ class UserAddUser extends Component {
             [type]: value,
             [type + 'Err']: '',
         });
-    };
-
-    handleCheckEmail = (email) => {
-        let isEmail = String(email)
-            .toLowerCase()
-            .match(
-                /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-            );
-
-        if (isEmail) {
-            this.setState({
-                emailErr: '',
-            });
-        } else {
-            this.setState({
-                emailErr: 'This is not a email',
-            });
-        }
-        return isEmail;
     };
 
     handleCheckPhoneNumber = (phoneNumber) => {
@@ -92,67 +76,31 @@ class UserAddUser extends Component {
         }
     };
 
-    handleCheckPassword = (password) => {
-        let isPassword = password.match(/^(?=.{5,})(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[\W])/);
-        if (isPassword) {
-            this.setState({
-                passwordErr: '',
-            });
-        } else {
-            this.setState({
-                passwordErr: 'the password is not validate',
-            });
-        }
-        return isPassword;
-    };
-
-    handleCheckRePassword = (password, rePassword) => {
-        // console.log(password, rePassword);
-        if (password == rePassword) {
-            this.setState({
-                rePasswordErr: '',
-            });
-            return true;
-        } else {
-            this.setState({
-                rePasswordErr: 'the re-password is not correct!',
-            });
-            return false;
-        }
-    };
-
     handleSubmit = async () => {
-        let allValidata = true;
-
-        this.isEmpty(this.state.email, 'email') && this.handleCheckEmail(this.state.email);
         this.isEmpty(this.state.phoneNumber, 'phoneNumber') && this.handleCheckPhoneNumber(this.state.phoneNumber);
         this.isEmpty(this.state.address, 'address');
         this.isEmpty(this.state.lastName, 'lastName');
         this.isEmpty(this.state.firstName, 'firstName');
-        this.isEmpty(this.state.password, 'password') && this.handleCheckPassword(this.state.password);
-        this.handleCheckRePassword(this.state.password, this.state.rePassword);
 
         if (
-            this.state.emailErr !== '' &&
             this.state.phoneNumberErr !== '' &&
             this.state.lastNameErr !== '' &&
             this.state.firstNameErr !== '' &&
-            this.state.addressErr !== '' &&
-            this.state.passwordErr !== '' &&
-            this.state.rePasswordErr !== ''
+            this.state.addressErr !== ''
         ) {
             console.log('submit');
 
-            let response = await this.props.createNewUser({
-                email: this.state.email,
+            let response = await this.props.updateUser({
+                ...this.props.userInfo,
                 phoneNumber: this.state.phoneNumber,
                 lastName: this.state.lastName,
                 firstName: this.state.firstName,
                 address: this.state.address,
-                password: this.state.password,
                 gender: this.state.gender,
                 roleId: this.state.roleId,
             });
+
+            console.log(response);
 
             if (response && response.errCode && response.errCode === 2) {
                 this.setState({
@@ -165,11 +113,23 @@ class UserAddUser extends Component {
     };
 
     render() {
-        // console.log(this.state);
         return (
             <div className="modal-create-containter">
+                {/* <Button
+                    color="danger"
+                    onClick={() => {
+                        this.toggle();
+                    }}
+                    className="px-2"
+                >
+                    {this.props.buttonLabel}
+                    Add new user
+                    <i className="fas fa-plus mx-2"></i>
+                </Button> */}
                 <Modal size="lg" isOpen={this.props.isOpen} toggle={this.toggle} className="modal-create-user">
-                    <ModalHeader toggle={this.toggle}>Modal title</ModalHeader>
+                    <ModalHeader className="bg-warning" toggle={this.toggle}>
+                        Update user's infomations
+                    </ModalHeader>
                     <ModalBody>
                         <form>
                             <div class="form-row">
@@ -182,7 +142,7 @@ class UserAddUser extends Component {
                                             id="inputEmail4"
                                             placeholder="Email"
                                             name="enter the email"
-                                            onChange={(e) => this.handleOnchangeInput(e.target.value, 'email')}
+                                            value={this.state.email}
                                         />
                                         <small className="text-danger">{this.state.emailErr}</small>
                                     </div>
@@ -194,6 +154,7 @@ class UserAddUser extends Component {
                                             id=""
                                             name="phoneNumber"
                                             placeholder="Enter your phone number"
+                                            value={this.state.phoneNumber}
                                             onChange={(e) => this.handleOnchangeInput(e.target.value, 'phoneNumber')}
                                         />
                                         <small className="text-danger">{this.state.phoneNumberErr}</small>
@@ -208,6 +169,7 @@ class UserAddUser extends Component {
                                             id=""
                                             name="lastName"
                                             placeholder="Enter your last name"
+                                            value={this.state.lastName}
                                             onChange={(e) => this.handleOnchangeInput(e.target.value, 'lastName')}
                                         />
                                         <small className="text-danger">{this.state.lastNameErr}</small>
@@ -220,6 +182,7 @@ class UserAddUser extends Component {
                                             id=""
                                             name="firstName"
                                             placeholder="Enter your first name"
+                                            value={this.state.firstName}
                                             onChange={(e) => this.handleOnchangeInput(e.target.value, 'firstName')}
                                         />
                                         <small className="text-danger">{this.state.firstNameErr}</small>
@@ -232,50 +195,11 @@ class UserAddUser extends Component {
                                         type="text"
                                         class="form-control"
                                         id="inputAddress"
+                                        value={this.state.address}
                                         placeholder="Enter your address"
                                         onChange={(e) => this.handleOnchangeInput(e.target.value, 'address')}
                                     />
                                     <small className="text-danger">{this.state.addressErr}</small>
-                                </div>
-                                <div class="form-group my-4 modal-password">
-                                    <label for="inputPassword4">Password</label>
-                                    <input
-                                        type={this.state.showPassword ? 'text' : 'password'}
-                                        class="form-control"
-                                        id="inputPassword4"
-                                        placeholder="Password"
-                                        onChange={(e) => this.handleOnchangeInput(e.target.value, 'password')}
-                                    />
-                                    <i
-                                        class="fas fa-eye"
-                                        onClick={() => {
-                                            this.setState({
-                                                showPassword: !this.state.showPassword,
-                                            });
-                                        }}
-                                    ></i>
-
-                                    <small className="text-danger">{this.state.passwordErr}</small>
-                                </div>
-                                <div class="form-group my-4 modal-password">
-                                    <label for="inputPassword4">Retype The Password</label>
-                                    <input
-                                        type={this.state.showRepassword ? 'text' : 'password'}
-                                        class="form-control"
-                                        id="inputPassword4"
-                                        placeholder="Re-password"
-                                        onChange={(e) => this.handleOnchangeInput(e.target.value, 'rePassword')}
-                                    />
-                                    <i
-                                        class="fas fa-eye"
-                                        onClick={() => {
-                                            this.setState({
-                                                showRepassword: !this.state.showRepassword,
-                                            });
-                                        }}
-                                    ></i>
-
-                                    <small className="text-danger">{this.state.rePasswordErr}</small>
                                 </div>
                             </div>
 
@@ -285,6 +209,7 @@ class UserAddUser extends Component {
                                     <select
                                         id="inputState"
                                         class="form-control"
+                                        value={this.state.gender}
                                         onChange={(e) => this.handleOnchangeInput(e.target.value, 'gender')}
                                     >
                                         <option selected value={0}>
@@ -298,6 +223,7 @@ class UserAddUser extends Component {
                                     <select
                                         id="inputState"
                                         class="form-control"
+                                        value={this.state.roleId}
                                         onChange={(e) => this.handleOnchangeInput(e.target.value, 'roleId')}
                                     >
                                         <option selected value={0}>
@@ -313,7 +239,7 @@ class UserAddUser extends Component {
 
                     <ModalFooter>
                         <Button color="primary px-2" onClick={() => this.handleSubmit()}>
-                            Submit
+                            Update
                         </Button>{' '}
                         <Button color="secondary px-2" onClick={this.toggle}>
                             Cancel

@@ -13,3 +13,13 @@ export const handleGetUserInfo = (id) => {
 export const handleCreateNewUser = (data) => {
     return axios.post('/api/create-user-info', data);
 };
+
+export const handleDeleteUser = (id) => {
+    console.log(id);
+    return axios.delete('/api/delete-user-info', { data: { id } });
+};
+
+export const handleUpdateUser = (data) => {
+    console.log(data);
+    // return axios.post('/api/update-user-info', {data})
+};

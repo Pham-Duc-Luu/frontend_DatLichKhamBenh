@@ -1,4 +1,29 @@
 {
+    "homeheader": {
+        "specialty": "Specialist",
+        "specialty-description": "Find a doctor on demand",
+        "place": "Medical facility",
+        "place-description": "Choose a hospital, clinic",
+        "doctor": "doctor",
+        "doctor-description": "Choose a good doctor",
+        "package": "Checkup package",
+        "package-description": "General health check",
+        "help": "help",
+        "language": "Language",
+        "vietnamese": "Vietnamese",
+        "english": "English"
+    },
+
+    "homebanner": {
+        "main-title": "Medical platform",
+        "description": "Take care of your health",
+        "specialty": "Specialized examination",
+        "remote-exam": "Remote examination",
+        "medical-test": "Medical test",
+        "general-health": "General examination",
+        "mental-health": "Mental health",
+        "medical-product": "Medical products"
+    },
     "common": {
         "add": "Add",
         "edit": "Edit",

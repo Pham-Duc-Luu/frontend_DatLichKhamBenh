@@ -1,0 +1,82 @@
+.HomeHeader {
+    display: flex;
+    justify-content: space-around;
+    padding: 20px 40px;
+    .header-logo {
+        display: flex;
+        align-items: center;
+        img {
+            height: 40px;
+            margin: 0 10px;
+        }
+
+        i {
+            font-size: 24px;
+        }
+
+        i:hover {
+            color: #0071ba;
+            cursor: pointer;
+        }
+    }
+    .header-main-func {
+        display: flex;
+        flex: 1;
+        margin: 0 60px;
+        justify-content: space-between;
+        // gap: 0 20px;
+        align-items: center;
+
+        > div {
+            // text-align: start;
+            .title {
+                margin: 0;
+                font-size: 14px;
+                // color: black;
+                font-weight: 580;
+                cursor: pointer;
+            }
+
+            .description {
+                cursor: pointer;
+                font-size: 12px;
+            }
+        }
+    }
+    .header-help {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        .help {
+            display: flex;
+            align-items: center;
+            padding: 6px;
+            // border: 2px solid #76c8ff;
+            border-radius: 4px;
+            i {
+                color: #76c8ff;
+            }
+            .title {
+                margin: 0;
+                font-size: 14px;
+                // color: black;
+                font-weight: 580;
+            }
+        }
+        .language {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 6px;
+            // border: 2px solid #76c8ff;
+            border-radius: 4px;
+
+            .title {
+                margin: 0;
+                font-size: 14px;
+                // color: black;
+                font-weight: 580;
+            }
+        }
+    }
+}

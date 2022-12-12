@@ -1,4 +1,29 @@
 {
+    "homeheader": {
+        "specialty": "Chuyên khoa",
+        "specialty-description": "Tìm bác sĩ theo yêu cầu",
+        "place": "Cở sở y tế",
+        "place-description": "Chọn bệnh viện, phòng khám",
+        "doctor": "Bác sĩ",
+        "doctor-description": "Chọn bác sĩ giỏi",
+        "package": "Gói khám",
+        "package-description": "Khám sức khỏe tổng quát",
+        "help": "Hỗ trợ",
+        "language": "Ngôn ngữ",
+        "vietnamese": "Tiếng Việt",
+        "english": "Tiếng Anh"
+    },
+
+    "homebanner": {
+        "main-title": "Nền tảng y tế",
+        "description": "Chăm sóc sức khỏe cho bạn",
+        "specialty": "Khám chuyên khoa",
+        "remote-exam": "Khám từ xa",
+        "medical-test": "Xét nghiệm y học",
+        "general-health": "Khám tổng quát",
+        "mental-health": "Sức khỏe tinh thần",
+        "medical-product": "Sản phẩm y tế"
+    },
     "common": {
         "add": "Thêm",
         "edit": "Sửa",

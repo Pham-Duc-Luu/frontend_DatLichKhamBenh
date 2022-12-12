@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
-import { handleGetUserInfo, handleCreateNewUser } from '../../services/userService';
+import { handleGetUserInfo, handleCreateNewUser, handleDeleteUser, handleUpdateUser } from '../../services/userService';
 import './UserManage.scss';
 import ModalAddUser from './ModalAddUser';
+import ModalUpdateUser from './ModalUpdateUser';
 
 class UserManage extends Component {
     constructor(props) {
@@ -11,6 +12,8 @@ class UserManage extends Component {
         this.state = {
             allUser: [],
             isOpenModal: false,
+            isOpenModalUpdate: false,
+            userInfo: {},
         };
     }
 
@@ -33,6 +36,12 @@ class UserManage extends Component {
         });
     };
 
+    toggleUpdateModal = () => {
+        this.setState({
+            isOpenModalUpdate: !this.state.isOpenModalUpdate,
+        });
+    };
+
     createNewUser = async (data) => {
         let response;
 
@@ -46,15 +55,55 @@ class UserManage extends Component {
         return response;
     };
 
+    deleteUser = async (id) => {
+        // console.log(id);
+        try {
+            let res = await handleDeleteUser(id);
+            console.log(res);
+            if (res && res.errCode === 0) {
+                this.displayAllUser();
+            }
+        } catch (e) {
+            console.log(e);
+        }
+    };
+
+    handleShowUpdateModal = (user) => {
+        this.setState({
+            isOpenModalUpdate: true,
+            userInfo: user,
+        });
+    };
+
+    updateUser = async (data) => {
+        try {
+            let res = await this.handleUpdateUser(data);
+        } catch (e) {}
+    };
+
     render() {
         return (
             <div className="container">
                 <h2>User manage</h2>
-                <ModalAddUser
-                    createNewUser={this.createNewUser}
-                    isOpen={this.state.isOpenModal}
-                    toggleModal={this.toggleModal}
-                />
+                <button type="button" class="btn btn-primary px-2" onClick={() => this.setState({ isOpenModal: true })}>
+                    Add new user
+                    <i className="fas fa-plus mx-2"></i>
+                </button>
+                {this.state.isOpenModal && (
+                    <ModalAddUser
+                        createNewUser={this.createNewUser}
+                        isOpen={this.state.isOpenModal}
+                        toggleModal={this.toggleModal}
+                    />
+                )}
+                {this.state.isOpenModalUpdate && (
+                    <ModalUpdateUser
+                        toggleModal={this.toggleUpdateModal}
+                        userInfo={this.state.userInfo}
+                        isOpen={this.state.isOpenModalUpdate}
+                        updateUser={this.updateUser}
+                    />
+                )}
 
                 <table className="table table-hover">
                     <thead>
@@ -74,11 +123,21 @@ class UserManage extends Component {
                                 <td>{user.lastName}</td>
                                 <td>{user.address}</td>
                                 <td>
-                                    <button type="button" className="btn btn-warning px-2">
+                                    <button
+                                        type="button"
+                                        className="btn btn-warning px-2"
+                                        onClick={() => {
+                                            this.handleShowUpdateModal(user);
+                                        }}
+                                    >
                                         Edit
                                         <i className="fas fa-edit mx-2"></i>
                                     </button>
-                                    <button type="button" className="btn btn-danger mx-3 px-2">
+                                    <button
+                                        type="button"
+                                        className="btn btn-danger mx-3 px-2"
+                                        onClick={() => this.deleteUser(user.id)}
+                                    >
                                         Delete
                                         <i className="fas fa-trash-alt mx-2"></i>
                                     </button>
