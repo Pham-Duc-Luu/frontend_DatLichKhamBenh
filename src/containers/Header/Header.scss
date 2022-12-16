@@ -1,4 +1,4 @@
-@import "../../styles/common.scss";
+@import '../../styles/common.scss';
 
 .header-container {
     z-index: 99;
@@ -8,6 +8,18 @@
     color: $common-text-color;
     height: 40px;
     position: relative;
+
+    .options {
+        display: flex;
+        align-items: center;
+
+        .languages {
+            .btn-secondary {
+                // background-color: transparent;
+            }
+        }
+    }
+
     .btn-logout {
         color: $common-text-color;
         line-height: 40px;

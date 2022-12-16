@@ -1,0 +1,23 @@
+.youtubeAdd {
+    .main-title {
+        margin: 40px !important;
+        text-align: left;
+        text-transform: none;
+    }
+    .main-cover {
+        display: flex;
+        justify-content: space-around;
+
+        .youtube {
+            flex: 1;
+        }
+        .other {
+            flex: 1;
+            list-style: none;
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+    }
+}

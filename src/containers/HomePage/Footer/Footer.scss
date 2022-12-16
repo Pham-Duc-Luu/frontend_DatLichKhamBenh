@@ -1,0 +1,69 @@
+.home-footer {
+    background-color: #ebebeb;
+    .footer-main {
+        display: flex;
+
+        .footer-address {
+            .footer-name {
+                font-size: 14px;
+                font-weight: 700;
+            }
+
+            .footer-place {
+                margin: 12px 0;
+            }
+            .footer-degree-logo {
+                margin: 12px 0;
+            }
+        }
+
+        .footer-contact {
+            list-style: none;
+            li {
+                margin: 12px;
+                a {
+                    text-decoration: none;
+                    font-size: 16px;
+                    font-weight: 200;
+                }
+            }
+        }
+
+        .footer-headquarters {
+            list-style: none;
+
+            li {
+                display: flex;
+                flex-direction: column;
+                .title {
+                    text-align: start;
+                    text-decoration: none;
+                    font-size: 20px;
+                    font-weight: 460;
+                }
+
+                .description {
+                    font-size: 13px;
+                    font-weight: 300;
+                }
+            }
+        }
+    }
+
+    .footer-extra {
+        display: flex;
+        justify-content: space-between;
+        padding: 20px;
+        background-color: #64b9e5;
+        font-weight: 300;
+
+        align-items: center;
+        .icon {
+            a {
+                margin: 6px;
+                text-decoration: none;
+                font-size: 20px;
+            }
+        }
+    }
+}

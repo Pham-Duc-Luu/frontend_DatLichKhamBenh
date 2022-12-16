@@ -22,8 +22,25 @@
         "medical-test": "Medical test",
         "general-health": "General examination",
         "mental-health": "Mental health",
-        "medical-product": "Medical products"
+        "medical-product": "Medical products",
+        "more": "more",
+        "Specialist": {
+            "main-title": "Popular specialties",
+            "eyes": "Eye specialist",
+            "spine": "spine department",
+            "pediatrics": "pediatrics",
+            "mental": "Psychosis",
+            "obstetrics": "Obstetrics and Gynecology",
+            "ultrasound": "ultrasound",
+            "ear-nose-throat": "Ear, nose and throat",
+            "nerve": "Department of Neurology",
+            "digest": "digest",
+            "cardiology": "cardiology",
+            "bone": "Department of Orthopedics",
+            "traditional-medicine": "traditional medicine"
+        }
     },
+
     "common": {
         "add": "Add",
         "edit": "Edit",
@@ -56,12 +73,27 @@
             "system-administrator": {
                 "header": "System Administrator",
                 "user-manage": "User manage",
-                "product-manage": "Package manage",
+                "user-redux": "Manage user by redux",
                 "register-package-group-or-account": "Register service package for group/account"
             },
             "system-parameter": {
                 "header": "System-parameter"
             }
+        },
+
+        "admin": {
+            "welcome": "Welcome",
+            "manage-user": "User",
+            "manage-doctor": "Doctor managed",
+            "manage-admin": "Admin managed",
+            "crud": "CRUD user",
+            "crud-redux": "CRUD redux",
+            "clinic": "Clinic",
+            "manage-clinic": "Clinic managed",
+            "specialist": "Specialist",
+            "manage-specialist": "Specialist managed",
+            "handbook": "Handbook",
+            "manage-handbook": "Handbook managed"
         }
     },
     "system": {

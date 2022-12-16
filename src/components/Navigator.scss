@@ -1,4 +1,4 @@
-@import "../styles/common.scss";
+@import '../styles/common.scss';
 
 .navigator-menu {
     display: flex;
@@ -16,6 +16,9 @@
         .menu-group-name {
             line-height: 40px;
             padding: 0 15px;
+            // min-width: 100px;
+            // display: flex;
+            justify-content: center;
             border-right: 1px solid $border;
             &:first-child {
                 border-left: 1px solid $border;

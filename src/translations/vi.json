@@ -22,7 +22,23 @@
         "medical-test": "Xét nghiệm y học",
         "general-health": "Khám tổng quát",
         "mental-health": "Sức khỏe tinh thần",
-        "medical-product": "Sản phẩm y tế"
+        "medical-product": "Sản phẩm y tế",
+        "more": "Xem thêm",
+        "Specialist": {
+            "main-title": "Các chuyên khoa phổ biến",
+            "eyes": "Khoa mắt",
+            "spine": "Khoa cột sống",
+            "pediatrics": "Khoa nhi",
+            "mental": "Rối loạn tâm thần",
+            "obstetrics": "Sản phụ khoa",
+            "ultrasound": "Siêu âm",
+            "ear-nose-throat": "Tai mũi họng",
+            "nerve": "Khoa thần kinh",
+            "digest": "Tiêu hóa",
+            "cardiology": "Khoa tim mạch",
+            "bone": "Khoa xương khớp",
+            "traditional-medicine": "Y học cổ truyền"
+        }
     },
     "common": {
         "add": "Thêm",
@@ -56,12 +72,26 @@
             "system-administrator": {
                 "header": "Quản trị hệ thống",
                 "user-manage": "Quản lý người sử dụng",
-                "product-manage": "Quản lý gói",
+                "user-redux": "Quản lý user redux",
                 "register-package-group-or-account": "Đăng ký gói dịch vụ cho nhóm/tài khoản"
             },
             "system-parameter": {
                 "header": "Tham số hệ thống"
             }
+        },
+        "admin": {
+            "welcome": "Chào mừng",
+            "manage-user": "Người dùng",
+            "manage-doctor": "Quản lí bác sĩ",
+            "manage-admin": "Quản lí admin",
+            "crud": "CRUD user",
+            "crud-redux": "CRUD redux",
+            "clinic": "Phòng khám",
+            "manage-clinic": "Quản lí phòng khám",
+            "specialist": "Chuyên khoa",
+            "manage-specialist": "Quản lí chuyên khoa",
+            "handbook": "Sổ tay",
+            "manage-handbook": "Quản lí sổ tay"
         }
     },
     "system": {
