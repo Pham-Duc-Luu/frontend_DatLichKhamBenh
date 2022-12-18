@@ -23,3 +23,8 @@ export const handleUpdateUser = (data) => {
     console.log(data);
     // return axios.post('/api/update-user-info', {data})
 };
+
+export const handleGetAllCode = (data) => {
+    // console.log(data);
+    return axios.get(`/api/allCode?type=${data}`);
+};

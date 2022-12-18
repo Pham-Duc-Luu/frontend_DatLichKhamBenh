@@ -91,7 +91,19 @@
             "specialist": "Chuyên khoa",
             "manage-specialist": "Quản lí chuyên khoa",
             "handbook": "Sổ tay",
-            "manage-handbook": "Quản lí sổ tay"
+            "manage-handbook": "Quản lí sổ tay",
+            "crud-keyword": {
+                "email": "Email",
+                "password": "Mật khẩu",
+                "first-name": "Họ",
+                "last-name": "Tên",
+                "address": "Địa chỉ",
+                "phone-number": "Số điện thoại",
+                "gender": "Giới tính",
+                "role": "Vai trò",
+                "position": "Vị trí",
+                "image": "Hình ảnh"
+            }
         }
     },
     "system": {

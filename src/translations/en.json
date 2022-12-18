@@ -93,7 +93,19 @@
             "specialist": "Specialist",
             "manage-specialist": "Specialist managed",
             "handbook": "Handbook",
-            "manage-handbook": "Handbook managed"
+            "manage-handbook": "Handbook managed",
+            "crud-keyword": {
+                "email": "Email",
+                "password": "Password",
+                "first-name": "First name",
+                "last-name": "Last name",
+                "address": "Address",
+                "phone-number": "Phone number",
+                "gender": "Gender",
+                "role": "Role",
+                "position": "Position",
+                "image": "Image"
+            }
         }
     },
     "system": {

@@ -31,5 +31,6 @@ export default (history) =>
         router: connectRouter(history),
         user: persistReducer(userPersistConfig, userReducer),
         // user: userReducer,
+        admin: adminReducer,
         app: persistReducer(appPersistConfig, appReducer),
     });
