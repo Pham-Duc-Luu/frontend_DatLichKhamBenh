@@ -1,9 +1,17 @@
 import React, { Component } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
-import * as actions from '../../store/actions/index';
+import * as actions from '../../../store/actions/index';
 import Lightbox from 'react-image-lightbox';
 import 'react-image-lightbox/style.css'; // This only needs to be imported once in your app
+import AllUsersTable from './AllUsersTable';
+
+import configEn from '../../../translations/en.json';
+import configVi from '../../../translations/vi.json';
+
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import CommonUtils from '../../../utils/CommonUtils';
 
 class UserRedux extends Component {
     state = {};
@@ -17,9 +25,10 @@ class UserRedux extends Component {
             isloadingGender: false,
             imgURL: '',
             isOpen: false,
-
+            isEdit: false,
             createUserResponse: {},
 
+            id: '',
             email: '',
             password: '',
             firstName: '',
@@ -29,6 +38,7 @@ class UserRedux extends Component {
             gender: '',
             role: '',
             position: '',
+            image: '',
         };
     }
 
@@ -36,6 +46,9 @@ class UserRedux extends Component {
         this.props.fetchGender();
         this.setState({
             isloadingGender: this.props.isloadingGender,
+        });
+        this.setState({
+            createUserResponse: this.props.createUserResponse,
         });
         // console.log(this.state);
     }
@@ -47,66 +60,196 @@ class UserRedux extends Component {
     }
 
     handleValidation = (e) => {
-        let { email, password, firstName, lastName, address, phoneNumber, gender, role, position, imgURL } = this.state;
+        let { email, password, firstName, lastName, address, phoneNumber, gender, role, position, image } = this.state;
 
         let arr = [
-            'email',
-            'password',
-            'firstName',
-            'lastName',
-            'address',
-            'phoneNumber',
-            'gender',
-            'role',
-            'position',
+            {
+                value: email,
+                keyword: 'email',
+            },
+            {
+                value: password,
+                keyword: 'password',
+            },
+            {
+                value: firstName,
+                keyword: 'first-name',
+            },
+            {
+                value: lastName,
+                keyword: 'last-name',
+            },
+            {
+                value: address,
+                keyword: 'address',
+            },
+            {
+                value: phoneNumber,
+                keyword: 'phone-number',
+            },
+            {
+                value: gender,
+                keyword: 'gender',
+            },
+            {
+                value: role,
+                keyword: 'role',
+            },
+            {
+                value: position,
+                keyword: 'position',
+            },
+            {
+                value: image,
+                keyword: 'image',
+            },
         ];
 
         let validate = true;
+        // console.log(image);
 
         for (let i = 0; i < arr.length; i++) {
-            if (!this.state[arr[i]]) {
-                alert(`please enter ${arr[i]}`);
+            // if(this.state)
+            if (this.state.isEdit && arr[i].keyword === 'password') continue;
+            if (!arr[i].value) {
+                // console.log(configEn.menu.admin['crud-keyword']);
+                this.notify(
+                    `${this.props.language === 'en' ? 'Please enter ' : 'Làm ơn nhập '} ${
+                        this.props.language === 'en'
+                            ? configEn.menu.admin['crud-keyword'][arr[i].keyword]
+                            : configVi.menu.admin['crud-keyword'][arr[i].keyword]
+                    }`,
+                );
+                // alert(`please enter ${arr[i]}`);
                 validate = false;
                 break;
             }
         }
 
+        return validate;
+
+        // if (validate) {
+        //     this.props.fetchCreateUser({
+        //         email,
+        //         password,
+        //         firstName,
+        //         lastName,
+        //         address,
+        //         phoneNumber,
+        //         gender,
+        //         roleId: role,
+        //         positionId: position,
+        //         image: image,
+        //     });
+        // }
+    };
+
+    handleCreateUser() {
+        let validate = this.handleValidation();
         if (validate) {
             this.props.fetchCreateUser({
-                email,
-                password,
-                firstName,
-                lastName,
-                address,
-                phoneNumber,
-                gender,
-                roleId: role,
-                positionId: position,
-                image: imgURL,
+                email: this.state.email,
+                password: this.state.password,
+                firstName: this.state.firstName,
+                lastName: this.state.lastName,
+                address: this.state.address,
+                phoneNumber: this.state.phoneNumber,
+                gender: this.state.gender,
+                roleId: this.state.role,
+                positionId: this.state.position,
+                image: this.state.image,
             });
-            // console.log('validate');
         }
+    }
+
+    handleUpdateUser() {
+        if (this.handleValidation()) {
+            this.props.fetchUpdateUser({
+                id: this.state.id.toString(),
+                email: this.state.email,
+                password: this.state.password,
+                firstName: this.state.firstName,
+                lastName: this.state.lastName,
+                address: this.state.address,
+                phoneNumber: this.state.phoneNumber,
+                gender: this.state.gender,
+                role: this.state.role,
+                position: this.state.position,
+                image: this.state.imgURL.toString('base64'),
+            });
+        }
+    }
+
+    handleGetUserInfo = (data) => {
+        console.log(data);
+
+        let imageBase64 = '';
+        if (data.image) {
+            imageBase64 = new Buffer(data.image, 'base64').toString('binary');
+        }
+        this.setState({
+            id: data.id,
+            email: data.email,
+            password: data.password,
+            firstName: data.firstName,
+            lastName: data.lastName,
+            address: data.address,
+            phoneNumber: data.phoneNumber,
+            gender: data.gender,
+            role: data.roleId,
+            position: data.positionId,
+            image: data.image,
+            imgURL: imageBase64,
+            isEdit: true,
+        });
     };
+
+    async handleOnChangeImage(e) {
+        if (e.target.files[0]) {
+            let imgBase64 = await CommonUtils.convertBase64(e.target.files[0]);
+            this.setState({
+                imgURL: URL.createObjectURL(e.target.files[0]),
+                image: imgBase64,
+            });
+        }
+        // let file = e.target.files[0];
+        // let base64 = await CommonUtils.convertBase64(file);
+        // console.log(base64);
+    }
+
+    notify(message) {
+        toast(message, {
+            position: 'top-right',
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: 'dark',
+        });
+    }
 
     componentDidUpdate(prevProps) {
         if (this.props.genderArr !== prevProps.genderArr) {
+            // console.log(this.props.genderArr);
             this.setState({
                 genderArr: this.props.genderArr,
-                gender: this.props.genderArr[0].key,
+                gender: this.props.genderArr[0] ? this.props.genderArr[0].key : '',
             });
         }
 
         if (this.props.roleArr !== prevProps.roleArr) {
             this.setState({
                 roleArr: this.props.roleArr,
-                role: this.props.roleArr[0].key,
+                role: this.props.roleArr[0] ? this.props.roleArr[0].key : '',
             });
         }
 
         if (this.props.positionArr !== prevProps.positionArr) {
             this.setState({
                 positionArr: this.props.positionArr,
-                position: this.props.positionArr[0].key,
+                position: this.props.positionArr[0] ? this.props.positionArr[0].key : '',
             });
         }
 
@@ -117,7 +260,7 @@ class UserRedux extends Component {
         }
 
         if (this.props.createUserResponse !== prevProps.createUserResponse) {
-            // alert(this.props.createUserResponse);
+            // console.log(this.props.createUserResponse);
             if (this.props.createUserResponse.errCode === 2) {
                 alert(this.props.createUserResponse.message);
             }
@@ -129,17 +272,45 @@ class UserRedux extends Component {
                     lastName: '',
                     address: '',
                     phoneNumber: '',
-                    gender: '',
-                    role: '',
-                    position: '',
+                    image: '',
+                    gender: this.props.genderArr[0] ? this.props.genderArr[0].key : '',
+                    role: this.props.roleArr[0] ? this.props.roleArr[0].key : '',
+                    position: this.props.positionArr[0] ? this.props.positionArr[0].key : '',
+                    imgURL: '',
                 });
+                this.notify(this.props.language === 'en' ? 'CREATE USER SUCCESSFUL!' : 'TẠO NGƯỜI DÙNG THÀNH CÔNG!');
+                this.props.fetchGetAllUser();
+            }
+        }
+
+        if (this.props.updateResponse !== prevProps.updateResponse) {
+            // console.log(this.props.createUserResponse);
+            if (this.props.updateResponse.errCode === 2) {
+                alert(this.props.updateResponse.message);
+            }
+            if (this.props.updateResponse.errCode === 0) {
+                this.setState({
+                    email: '',
+                    password: '',
+                    firstName: '',
+                    lastName: '',
+                    address: '',
+                    phoneNumber: '',
+                    image: '',
+                    gender: this.props.genderArr[0] ? this.props.genderArr[0].key : '',
+                    role: this.props.roleArr[0] ? this.props.roleArr[0].key : '',
+                    position: this.props.positionArr[0] ? this.props.positionArr[0].key : '',
+                    imgURL: '',
+                });
+                this.notify(this.props.language === 'en' ? 'UPDATE USER SUCCESSFUL!' : 'SỬA NGƯỜI DÙNG THÀNH CÔNG!');
+                this.props.fetchGetAllUser();
             }
         }
     }
 
     render() {
         // console.log(this.props);
-        // console.log(this.state);
+
         return (
             <div className="use-redux">
                 <div className="use-redux-container">
@@ -169,6 +340,7 @@ class UserRedux extends Component {
                                         type="text"
                                         value={this.state.password}
                                         class="form-control"
+                                        disabled={this.state.isEdit}
                                     />
                                 </div>
                             </div>
@@ -232,7 +404,11 @@ class UserRedux extends Component {
                                         value={this.state.gender}
                                         {this.state.genderArr !== [] ? (
                                             this.state.genderArr.map((value, index) => (
-                                                <option key={index}>
+                                                <option
+                                                    key={index}
+                                                    value={value.key}
+                                                    selected={value.key === this.state.gender}
+                                                >
                                                     {this.props.language === 'en' ? value.valueEn : value.valueVi}
                                                 </option>
                                             ))
@@ -252,7 +428,11 @@ class UserRedux extends Component {
                                         value={this.state.role}
                                         {this.state.roleArr !== [] ? (
                                             this.state.roleArr.map((value, index) => (
-                                                <option key={index}>
+                                                <option
+                                                    key={index}
+                                                    value={value.key}
+                                                    selected={value.key === this.state.role}
+                                                >
                                                     {this.props.language === 'en' ? value.valueEn : value.valueVi}
                                                 </option>
                                             ))
@@ -272,7 +452,11 @@ class UserRedux extends Component {
                                         value={this.state.position}
                                         {this.state.positionArr !== [] ? (
                                             this.state.positionArr.map((value, index) => (
-                                                <option key={index}>
+                                                <option
+                                                    key={index}
+                                                    value={value.key}
+                                                    selected={value.key === this.state.position}
+                                                >
                                                     {this.props.language === 'en' ? value.valueEn : value.valueVi}
                                                 </option>
                                             ))
@@ -294,13 +478,7 @@ class UserRedux extends Component {
                                             type="file"
                                             id="inputFileImg"
                                             style={{ display: 'none' }}
-                                            onChange={(e) => {
-                                                if (e.target.files[0]) {
-                                                    this.setState({
-                                                        imgURL: URL.createObjectURL(e.target.files[0]),
-                                                    });
-                                                }
-                                            }}
+                                            onChange={(e) => this.handleOnChangeImage(e)}
                                             accept=".jpg,.png"
                                         />
                                         <i class="fas fa-upload"></i>
@@ -321,16 +499,27 @@ class UserRedux extends Component {
                                     ></div>
                                 </div>
                             </div>
-
-                            <button
-                                class="btn btn-primary px-3 m-3"
-                                onClick={(e) => {
-                                    e.preventDefault();
-                                    this.handleValidation(e);
-                                }}
-                            >
-                                Sign in
-                            </button>
+                            {this.state.isEdit ? (
+                                <button
+                                    class="btn btn-warning px-3 m-3"
+                                    onClick={(e) => {
+                                        e.preventDefault();
+                                        this.handleUpdateUser(e);
+                                    }}
+                                >
+                                    <FormattedMessage id="common.update" />
+                                </button>
+                            ) : (
+                                <button
+                                    class="btn btn-primary px-3 m-3"
+                                    onClick={(e) => {
+                                        e.preventDefault();
+                                        this.handleCreateUser(e);
+                                    }}
+                                >
+                                    <FormattedMessage id="common.save" />
+                                </button>
+                            )}
                         </form>
                     </div>
 
@@ -338,6 +527,7 @@ class UserRedux extends Component {
                         <Lightbox mainSrc={this.state.imgURL} onCloseRequest={() => this.setState({ isOpen: false })} />
                     )}
                 </div>
+                <AllUsersTable handleUpdateUser={this.handleGetUserInfo} />
             </div>
         );
     }
@@ -351,6 +541,7 @@ const mapStateToProps = (state) => {
         positionArr: state.admin.position,
         language: state.app.language,
         createUserResponse: state.admin.createUserResponse,
+        updateResponse: state.admin.updateResponse,
     };
 };
 
@@ -358,6 +549,8 @@ const mapDispatchToProps = (dispatch) => {
     return {
         fetchGender: () => dispatch(actions.fetchGender()),
         fetchCreateUser: (data) => dispatch(actions.fetchCreateUser(data)),
+        fetchGetAllUser: () => dispatch(actions.fetchGetAllUser()),
+        fetchUpdateUser: (data) => dispatch(actions.fetchUpdateUser(data)),
     };
 };
 

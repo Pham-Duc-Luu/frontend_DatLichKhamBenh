@@ -56,7 +56,7 @@ class App extends Component {
                                 </Switch>
                             </CustomScrollbars>
                         </span>
-
+                        {/* 
                         <ToastContainer
                             className="toast-container"
                             toastClassName="toast-item"
@@ -68,7 +68,8 @@ class App extends Component {
                             closeOnClick={false}
                             draggable={false}
                             closeButton={<CustomToastCloseButton />}
-                        />
+                        /> */}
+                        <ToastContainer />
                     </div>
                 </Router>
             </Fragment>

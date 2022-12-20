@@ -15,13 +15,12 @@ export const handleCreateNewUser = (data) => {
 };
 
 export const handleDeleteUser = (id) => {
-    console.log(id);
     return axios.delete('/api/delete-user-info', { data: { id } });
 };
 
 export const handleUpdateUser = (data) => {
     console.log(data);
-    // return axios.post('/api/update-user-info', {data})
+    return axios.post('/api/update-user-info', data);
 };
 
 export const handleGetAllCode = (data) => {
