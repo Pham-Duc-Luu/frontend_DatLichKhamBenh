@@ -5,6 +5,10 @@ import {
     handleGetUserInfo,
     handleDeleteUser,
     handleUpdateUser,
+    handleGetTopDoctor,
+    handleGetAllDoctor,
+    handleSaveDoctorDetail,
+    handleGetDoctorDetailById,
 } from '../../services/index';
 
 /**
@@ -144,7 +148,6 @@ export const fetchUpdateUser = (data) => {
         try {
             dispatch({ type: actionTypes.UPDATE_USER, data: {} });
             let response = await handleUpdateUser(data);
-            console.log(response);
             if (response && response.errCode === 0) {
                 dispatch(fetchUpdateUserSuccess(response));
             } else {
@@ -162,4 +165,119 @@ export const fetchUpdateUserSuccess = (data) => {
 
 export const fetchUpdateUserFail = (data) => {
     return { type: actionTypes.UPDATE_USER_FAIL, data };
+};
+
+/**
+ * GET TOP 10 DOCTOR
+ */
+
+export const getTopdoctor = (limit) => {
+    return async (dispatch, getState) => {
+        try {
+            dispatch({ type: actionTypes.GET_DOCTOR_TOP, data: {} });
+            let response = await handleGetTopDoctor(limit);
+            // console.log('get top doctor', response);
+            if (response && response.errCode === 0) {
+                dispatch(getTopdoctorSuccess(response));
+            } else {
+                dispatch(getTopdoctorFail(response));
+            }
+        } catch (e) {
+            dispatch(getTopdoctorFail());
+        }
+    };
+};
+
+export const getTopdoctorSuccess = (data) => {
+    return { type: actionTypes.GET_DOCTOR_TOP_SUCCESS, data };
+};
+
+export const getTopdoctorFail = (data) => {
+    return { type: actionTypes.GET_DOCTOR_TOP_FAIL, data };
+};
+
+/**
+ * GET ALL DOCTOR
+ */
+
+export const getAllDoctor = (limit) => {
+    return async (dispatch, getState) => {
+        try {
+            dispatch({ type: actionTypes.GET_ALL_DOCTOR, data: {} });
+            let response = await handleGetAllDoctor();
+            // console.log('get top doctor', response);
+            if (response && response.errCode === 0) {
+                dispatch(getAllDoctorSuccess(response));
+            } else {
+                dispatch(getAllDoctorFail(response));
+            }
+        } catch (e) {
+            dispatch(getAllDoctorFail());
+        }
+    };
+};
+
+export const getAllDoctorSuccess = (data) => {
+    return { type: actionTypes.GET_ALL_DOCTOR_SUCCESS, data };
+};
+
+export const getAllDoctorFail = (data) => {
+    return { type: actionTypes.GET_ALL_DOCTOR_FAIL, data };
+};
+
+/**
+ * CREATE DESCRIPTIONS
+ */
+
+export const saveDoctorDetail = (data) => {
+    return async (dispatch, getState) => {
+        try {
+            dispatch({ type: actionTypes.SAVE_DOCTOR_DETAIL, data: {} });
+            let response = await handleSaveDoctorDetail(data);
+            // console.log('get top doctor', response);
+            if (response && response.errCode === 0) {
+                dispatch(saveDoctorDetailSuccess(response));
+            } else {
+                dispatch(saveDoctorDetailFail(response));
+            }
+        } catch (e) {
+            dispatch(saveDoctorDetailFail());
+        }
+    };
+};
+
+export const saveDoctorDetailSuccess = (data) => {
+    return { type: actionTypes.SAVE_DOCTOR_DETAIL_SUCCESS, data };
+};
+
+export const saveDoctorDetailFail = (data) => {
+    return { type: actionTypes.SAVE_DOCTOR_DETAIL_FAIL, data };
+};
+
+/**
+ * GET DOCTOR BY ID
+ */
+
+export const getDoctorDetailById = (id) => {
+    return async (dispatch, getState) => {
+        try {
+            dispatch({ type: actionTypes.GET_DOTOR_BY_ID, data: {} });
+            let response = await handleGetDoctorDetailById(id);
+            if (response && response.errCode === 0) {
+                dispatch(getDoctorDetailByIdSuccess(response));
+            } else {
+                dispatch(getDoctorDetailByIdFail(response));
+            }
+        } catch (e) {
+            dispatch(getDoctorDetailByIdFail());
+        }
+    };
+};
+
+export const getDoctorDetailByIdSuccess = (data) => {
+    return { type: actionTypes.GET_DOTOR_BY_ID_SUCCESS, data };
+};
+
+export const getDoctorDetailByIdFail = (data) => {
+    return { type: actionTypes.GET_DOTOR_BY_ID_FAIL, data };
 };

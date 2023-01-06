@@ -34,7 +34,6 @@ function SampleNextArrow(props) {
 
 function SamplePrevArrow(props) {
     const { className, style, onClick } = props;
-    console.log(props);
     return (
         <div onClick={onClick} className="custom-preArrow text-secondary border-secondary rounded border ">
             <i class="fas fa-chevron-left"></i>

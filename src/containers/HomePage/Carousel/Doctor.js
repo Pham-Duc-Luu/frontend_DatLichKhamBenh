@@ -3,10 +3,14 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Slider from 'react-slick';
 
+import * as action from '../../../store/actions/index';
+
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import './Doctor.scss';
-// import {Fo}
+import { withRouter } from 'react-router';
+
+import { FormattedMessage } from 'react-intl';
 
 import chuyenkhoamat from '../../../assets/images/chuyen-khoa-mat.jpg';
 import cotsong from '../../../assets/images/cot-song.jpg';
@@ -33,7 +37,6 @@ function SampleNextArrow(props) {
 
 function SamplePrevArrow(props) {
     const { className, style, onClick } = props;
-    console.log(props);
     return (
         <div onClick={onClick} className="custom-preArrow text-secondary border-secondary rounded border ">
             <i class="fas fa-chevron-left"></i>
@@ -42,97 +45,75 @@ function SamplePrevArrow(props) {
 }
 
 class Doctor extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            doctorArr: [],
+        };
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (prevProps.topDoctorRes !== this.props.topDoctorRes) {
+            this.setState({
+                doctorArr: this.props.topDoctorRes.data,
+            });
+        }
+    }
+
+    componentDidMount() {
+        this.props.getTopdoctor(10);
+    }
     render() {
         let settings = {
             dots: false,
             infinite: true,
             speed: 500,
             slidesToShow: 4,
-            slidesToScroll: 4,
+            slidesToScroll: 1,
             nextArrow: <SampleNextArrow />,
             prevArrow: <SamplePrevArrow />,
+
+            cssEase: 'linear',
         };
 
         return (
             <div>
                 <div className="specailist-carousel m-5 p-5 ">
                     <div className="carousel-header">
-                        <div className="title text-secondary">Cac Chuyen Khoa Pho Bien</div>
-                        <div className="more bg-light border border-dark rounded">Xem Them</div>
+                        <div className="title text-secondary">
+                            <FormattedMessage id="homebanner.top-doctor" />
+                        </div>
+                        <div className="more bg-light border border-dark rounded">
+                            <FormattedMessage id="homebanner.more" />
+                        </div>
                     </div>
                     <Slider {...settings}>
-                        <div>
-                            <div className="img-cover col">
-                                <img src={chuyenkhoamat} />
-                                <div className="title text-secondary">chuyen khoa</div>
-                            </div>
-                        </div>
-                        <div>
-                            <div className="img-cover">
-                                <img src={cotsong} />
-                                <div className="title text-secondary">chuyen khoa</div>
-                            </div>
-                        </div>
-                        <div>
-                            <div className="img-cover">
-                                <img src={nhikhoa} />
-                                <div className="title text-secondary">chuyen khoa</div>
-                            </div>
-                        </div>
-                        <div>
-                            <div className="img-cover">
-                                <img src={roiloantamthan} />
-                                <div className="title text-secondary">chuyen khoa</div>
-                            </div>
-                        </div>
-                        <div>
-                            <div className="img-cover">
-                                <img src={sanphukhoa} />
-                                <div className="title text-secondary">chuyen khoa</div>
-                            </div>
-                        </div>
-                        <div>
-                            <div className="img-cover">
-                                <img src={sieuamthai} />
-                                <div className="title text-secondary">chuyen khoa</div>
-                            </div>
-                        </div>
-                        <div>
-                            <div className="img-cover">
-                                <img src={taimuihong} />
-                                <div className="title text-secondary">chuyen khoa</div>
-                            </div>
-                        </div>
-                        <div>
-                            <div className="img-cover">
-                                <img src={thankinh} />
-                                <div className="title text-secondary">chuyen khoa</div>
-                            </div>
-                        </div>{' '}
-                        <div>
-                            <div className="img-cover">
-                                <img src={tieuhoa} />
-                                <div className="title text-secondary">chuyen khoa</div>
-                            </div>
-                        </div>
-                        <div>
-                            <div className="img-cover">
-                                <img src={timmach} />
-                                <div className="title text-secondary">chuyen khoa</div>
-                            </div>
-                        </div>{' '}
-                        <div>
-                            <div className="img-cover">
-                                <img src={xuongkhop} />
-                                <div className="title text-secondary">chuyen khoa</div>
-                            </div>
-                        </div>
-                        <div>
-                            <div className="img-cover">
-                                <img src={yhoccotruyen} />
-                                <div className="title text-secondary">chuyen khoa</div>
-                            </div>
-                        </div>
+                        {Array.isArray(this.state.doctorArr) &&
+                            this.state.doctorArr.map((doctor, index) => {
+                                let doctorImg = doctor.image.data;
+                                let doctorImgURL = new Buffer(doctorImg, 'base64').toString('binary');
+
+                                return (
+                                    <div>
+                                        <div
+                                            className="img-cover"
+                                            onClick={() => {
+                                                this.props.history.push(`/detail-doctor/${doctor.id}`);
+                                                console.log(doctor.id);
+                                            }}
+                                        >
+                                            <img src={doctorImgURL} />
+                                            <div className="title text-secondary">
+                                                {this.props.language === 'en'
+                                                    ? doctor.positionData.valueEn
+                                                    : doctor.positionData.valueVi}{' '}
+                                                {doctor.lastName}
+                                            </div>
+                                            <div className="decription"></div>
+                                        </div>
+                                    </div>
+                                );
+                            })}
                     </Slider>
                 </div>
             </div>
@@ -143,11 +124,15 @@ class Doctor extends Component {
 const mapStateToProps = (state) => {
     return {
         isLoggedIn: state.user.isLoggedIn,
+        language: state.app.language,
+        topDoctorRes: state.admin.topDoctorRes,
     };
 };
 
 const mapDispatchToProps = (dispatch) => {
-    return {};
+    return {
+        getTopdoctor: (limit) => dispatch(action.getTopdoctor(limit)),
+    };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Doctor);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Doctor));

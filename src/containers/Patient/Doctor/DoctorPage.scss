@@ -1,0 +1,37 @@
+.detail-doctor-page {
+    .container {
+        .container-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            .img {
+                width: 120px;
+                height: 120px;
+                object-fit: cover;
+                border-radius: 50000px;
+                // border: ;
+            }
+            .info {
+            }
+        }
+
+        .booking {
+            .calendar {
+                .booking-title {
+                    font-size: 16px;
+                    font-weight: 700;
+                }
+            }
+
+            ul {
+                list-style: none;
+                display: flex;
+                flex-wrap: wrap;
+                padding: 0;
+                li {
+                    text-align: center;
+                }
+            }
+        }
+    }
+}

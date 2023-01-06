@@ -7,6 +7,8 @@ import { ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reac
 import { FormattedMessage } from 'react-intl';
 import { changeLanguage } from '../../store/actions/appActions';
 import { LANGUAGES } from '../../utils/constant';
+import { withRouter } from 'react-router';
+import { path } from '../../utils';
 
 class HomeHeader extends Component {
     constructor(props) {
@@ -29,12 +31,17 @@ class HomeHeader extends Component {
         });
     }
     render() {
-        console.log(this.props);
         return (
             <div className="HomeHeader">
                 <div className="header-logo">
                     <i class="fas fa-bars"></i>
-                    <img src={logo} />
+                    <img
+                        src={logo}
+                        onClick={() => {
+                            console.log(123);
+                            this.props.history.push(path.HOMEPAGE);
+                        }}
+                    />
                 </div>
                 <ul className="header-main-func">
                     <div className="specialist ">
@@ -124,4 +131,4 @@ const mapDispatchToProps = (dispatch) => {
     return { changeLanguage: (language) => dispatch(changeLanguage(language)) };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(HomeHeader);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(HomeHeader));

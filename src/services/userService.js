@@ -27,3 +27,19 @@ export const handleGetAllCode = (data) => {
     // console.log(data);
     return axios.get(`/api/allCode?type=${data}`);
 };
+
+export const handleGetTopDoctor = (limit) => {
+    return axios.get(`/api/get-doctor-info?limit=${limit}`);
+};
+
+export const handleGetAllDoctor = () => {
+    return axios.get(`/api/get-all-doctor`);
+};
+
+export const handleSaveDoctorDetail = (data) => {
+    return axios.post('/api/save-detail-info-doctor', data);
+};
+
+export const handleGetDoctorDetailById = (id) => {
+    return axios.get(`/api/get-doctor-detail-description-by-id?id=${id}`);
+};
