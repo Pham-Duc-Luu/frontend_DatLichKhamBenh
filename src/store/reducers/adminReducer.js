@@ -13,6 +13,7 @@ const initialState = {
     allDoctor: [],
     saveDoctorDetailResponse: {},
     getDoctorDetailByIdResponse: {},
+    timeSchedule: [],
 };
 
 const adminReducer = (state = initialState, action) => {
@@ -216,6 +217,29 @@ const adminReducer = (state = initialState, action) => {
             return {
                 ...state,
                 getDoctorDetailByIdResponse: action.data,
+            };
+
+        /**
+         * GET SCHEDULE MANAGE
+         */
+        case actionTypes.GET_SCHEDULE:
+            console.log('fetch GET_SCHEDULE ok!', action);
+
+            return {
+                ...state,
+            };
+        case actionTypes.GET_SCHEDULE_SUCCESS:
+            console.log('fetch GET_SCHEDULE_SUCCESS ok!', action);
+            return {
+                ...state,
+                timeSchedule: action.data.data,
+            };
+        case actionTypes.GET_SCHEDULE_FAIL:
+            console.log('fetch GET_SCHEDULE_FAIL ok!', action);
+
+            return {
+                ...state,
+                timeSchedule: action.data.data,
             };
         default:
             return state;

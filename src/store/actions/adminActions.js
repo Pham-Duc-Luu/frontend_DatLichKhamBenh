@@ -281,3 +281,31 @@ export const getDoctorDetailByIdSuccess = (data) => {
 export const getDoctorDetailByIdFail = (data) => {
     return { type: actionTypes.GET_DOTOR_BY_ID_FAIL, data };
 };
+
+/**
+ * GET DOCTOR BY ID
+ */
+
+export const getSchedule = (id) => {
+    return async (dispatch, getState) => {
+        try {
+            dispatch({ type: actionTypes.GET_SCHEDULE, data: {} });
+            let response = await handleGetAllCode('TIME');
+            if (response && response.errCode === 0) {
+                dispatch(getScheduleSuccess(response));
+            } else {
+                dispatch(getScheduleFail(response));
+            }
+        } catch (e) {
+            dispatch(getScheduleFail());
+        }
+    };
+};
+
+export const getScheduleSuccess = (data) => {
+    return { type: actionTypes.GET_SCHEDULE_SUCCESS, data };
+};
+
+export const getScheduleFail = (data) => {
+    return { type: actionTypes.GET_SCHEDULE_FAIL, data };
+};

@@ -49,6 +49,12 @@ class Login extends Component {
         }
     };
 
+    handleOnkeyDown = (e) => {
+        if (e.key === 'Enter' || e.keyCode === 13) {
+            this.handleLogin();
+        }
+    };
+
     render() {
         return (
             <div className="login-background">
@@ -57,6 +63,7 @@ class Login extends Component {
                     <div className="login-Username form-group">
                         <label>Username</label>
                         <input
+                            onKeyDown={(e) => this.handleOnkeyDown(e)}
                             type="email"
                             className="form-control"
                             placeholder="Enter your username"
@@ -74,6 +81,7 @@ class Login extends Component {
                         <label>Password</label>
                         <div className="login-username-box">
                             <input
+                                onKeyDown={(e) => this.handleOnkeyDown(e)}
                                 type={this.state.hidden ? 'password' : 'text'}
                                 className="form-control"
                                 placeholder="Enter your password"
