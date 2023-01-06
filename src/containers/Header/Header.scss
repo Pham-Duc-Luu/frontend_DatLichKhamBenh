@@ -19,6 +19,13 @@
             }
         }
     }
+    .menu-group {
+        .menu-list {
+            .menu {
+                width: 100%;
+            }
+        }
+    }
 
     .btn-logout {
         color: $common-text-color;

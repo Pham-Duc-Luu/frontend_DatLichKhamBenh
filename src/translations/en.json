@@ -108,6 +108,9 @@
                 "position": "Position",
                 "image": "Image"
             }
+        },
+        "doctor": {
+            "manage-schedule": "Schedule's manage"
         }
     },
     "system": {

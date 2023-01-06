@@ -106,6 +106,9 @@
                 "position": "Vị trí",
                 "image": "Hình ảnh"
             }
+        },
+        "doctor": {
+            "manage-schedule": "Quản lí danh sách khám bệnh"
         }
     },
     "system": {
