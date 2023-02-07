@@ -15,7 +15,7 @@ class ManageSchedule extends Component {
         super(props);
         this.state = {
             doctorId: '',
-            currentDate: new Date(),
+            currentDate: '',
             selectedOption: {},
             doctorList: [],
             timeList: [],
@@ -44,6 +44,9 @@ class ManageSchedule extends Component {
                 this.setState({ timeList: timeList });
             }
         }
+
+        if (this.props.saveScheduleRes !== prevProps.saveScheduleRes) {
+        }
     }
 
     handleChange = (selectedOption) => {
@@ -55,7 +58,9 @@ class ManageSchedule extends Component {
     };
 
     handleOnChageDatePicker = (date) => {
-        this.setState({ currentDate: moment(date[0]).format(dateFormat.SEND_TO_SERVER) });
+        // this.setState({ currentDate: moment(date[0]).format(dateFormat.SEND_TO_SERVER) });
+
+        this.setState({ currentDate: new Date(date[0]).getTime() });
     };
 
     handleOnSubmit = () => {
@@ -63,14 +68,16 @@ class ManageSchedule extends Component {
         let submitTime = this.state.timeList
             .filter((time) => time.isSelected)
             .map((time) => {
-                return { time, doctor: selectedOption.value, currentDate };
+                return { timeType: time.keyMap, doctorId, date: currentDate };
             });
 
         if (doctorId && currentDate && submitTime.length > 0) {
             toast.success('successful');
+            this.props.saveDoctorSchedule(submitTime);
         } else {
             toast.error('error');
         }
+        console.log(submitTime);
     };
     render() {
         return (
@@ -90,7 +97,7 @@ class ManageSchedule extends Component {
                             <label>Chon bac sy</label>
                             <DatePicker
                                 onChange={this.handleOnChageDatePicker}
-                                minDate={new Date()}
+                                minDate={new Date(new Date().setDate(new Date().getDate() - 1))}
                                 className="form-control"
                                 value={this.state.currentDate}
                             />
@@ -103,6 +110,7 @@ class ManageSchedule extends Component {
                             this.state.timeList.map((time, index, arr) => {
                                 return (
                                     <button
+                                        key={index}
                                         type="button"
                                         className={`btn ${time.isSelected ? ' btn-warning' : 'btn-light'} mx-2 px-2`}
                                         onClick={() => {
@@ -133,6 +141,7 @@ const mapStateToProps = (state) => {
         allDoctor: state.admin.allDoctor,
         language: state.app.language,
         timeSchedule: state.admin.timeSchedule,
+        saveScheduleRes: state.admin.saveScheduleRes,
     };
 };
 
@@ -141,6 +150,7 @@ const mapDispatchToProps = (dispatch) => {
         getAllDoctor: () => dispatch(actions.getAllDoctor()),
         getSchedule: () => dispatch(actions.getSchedule()),
         getDoctorDetailById: (id) => dispatch(actions.getDoctorDetailById(id)),
+        saveDoctorSchedule: (data) => dispatch(actions.saveDoctorSchedule(data)),
     };
 };
 

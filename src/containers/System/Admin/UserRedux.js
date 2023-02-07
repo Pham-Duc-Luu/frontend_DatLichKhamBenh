@@ -215,7 +215,7 @@ class UserRedux extends Component {
     }
 
     notify(message) {
-        toast(message, {
+        toast.success(message, {
             position: 'top-right',
             autoClose: 5000,
             hideProgressBar: false,
@@ -223,7 +223,7 @@ class UserRedux extends Component {
             pauseOnHover: true,
             draggable: true,
             progress: undefined,
-            theme: 'dark',
+            theme: 'light',
         });
     }
 

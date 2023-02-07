@@ -1,4 +1,10 @@
 .doctor-manage {
+    label {
+        font-weight: 600;
+    }
+    input {
+        outline: none !important;
+    }
     .doctor-select {
     }
     .doctor-description {
@@ -10,7 +16,6 @@
 
         textarea {
             outline: none;
-            border: none;
         }
     }
 

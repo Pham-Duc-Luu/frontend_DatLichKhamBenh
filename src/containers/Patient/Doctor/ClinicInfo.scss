@@ -1,0 +1,28 @@
+.clinic-info {
+    .clinic-address {
+        > span {
+            font-weight: 600;
+            font-size: 26px;
+        }
+
+        .clinic-name {
+            font-weight: 600;
+            font-size: 18px;
+        }
+    }
+
+    .clinic-price {
+        .clinic-price-box {
+            .price {
+                background: rgb(231, 231, 231);
+            }
+            .payment {
+                background: rgb(219, 219, 219);
+            }
+        }
+        .hide-price {
+            font-size: 12px;
+            cursor: pointer;
+        }
+    }
+}

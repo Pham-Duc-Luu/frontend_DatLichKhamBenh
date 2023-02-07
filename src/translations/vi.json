@@ -39,6 +39,27 @@
             "cardiology": "Khoa tim mạch",
             "bone": "Khoa xương khớp",
             "traditional-medicine": "Y học cổ truyền"
+        },
+        "doctor-page": {
+            "schedule": "Lịch khám bệnh",
+            "no-schedule": "Không có lịch khám",
+            "booking": "đặt lịch hẹn",
+
+            "clinic": {
+                "address": "Địa chỉ phòng khám",
+                "price": "Giá khám bệnh",
+                "hide": "Ẩn giá",
+                "show": "Xem giá",
+                "payment-methods": "Phương thức thanh toán"
+            },
+            "information": "The medical examination information",
+            "name": "Full name",
+            "phone": "The phone number",
+            "email": "The email address",
+            "address": "The address",
+            "reason": "The reason for examination",
+            "gender": "Your gender",
+            "birth": "Date of birth"
         }
     },
     "common": {
@@ -138,55 +159,18 @@
             },
             "sure-delete-user": "Bạn có chắc chắn muốn xóa người dùng này?"
         },
-        "product-manage": {
-            "fail-to-load-foprtype": "Không thể tải về danh sách gói",
-            "prid": "Mã gói",
-            "prname": "Tên gói",
-            "prtype": "Loại gói",
-            "status": "Trạng thái",
-            "description": "Diễn giải",
-            "effective-date": "Ngày hiệu lực",
-            "expiration-date": "Ngày hết hiệu lực",
-            "add-product": "Thêm gói",
-            "add-product-success": "Thêm gói thành công",
-            "add-product-fail": "Thêm gói thất bại",
-            "edit-product": "Sửa thông tin gói",
-            "package-decentralize": "Phân quyền chức năng",
-            "edit-product-success": "Thay đổi thông tin gói thành công",
-            "edit-product-fail": "Thay đổi thông tin gói thất bại",
-            "delete-product-success": "Xóa gói thành công",
-            "delete-product-fail": "Xóa gói thất bại",
-            "invalid-input": {
-                "prid": "Quý khách vui lòng nhập mã gói",
-                "prname": "Quý khách vui lòng nhập tên gói"
-            },
-            "fail-to-load-decentralize-info": "Không thể tải về thông tin phân quyền chức năng",
-            "save-decentralize-success": "Lưu phân quyền chức năng thành công",
-            "save-decentralize-fail": "Lưu phân quyền chức năng thất bại",
-            "sure-delete-package": "Bạn có chắc chắn muốn xóa gói này?"
-        },
-        "register-package-group-or-acc": {
-            "assign-service-package-to-customer": "Gán gói dịch vụ cho khách hàng",
-            "package-name": "Tên gói",
-            "assign-type": "Loại gán",
-            "cust-acc-group": "Nhóm KH/Tài khoản",
-            "effective-date": "Ngày hiệu lực",
-            "expiration-date": "Ngày hết hiệu lực",
-            "assign": "Gán",
-            "manage-assign-groups": "Quản lý gán nhóm",
-            "group-cust-acc-name": "Tên nhóm/tài khoản KH",
-            "del-assign": "Xóa gán",
-            "fail-to-load-manage-assign-groups-list": "Không thể tải về thông tin quản lý gán nhóm",
-            "invalid-selected": {
-                "currentfoProduct": "Gói đang chọn không hợp lệ",
-                "currentAssignType": "Loại gán không hợp lệ",
-                "currentFoUser": "Nhóm KH/Tài khoản không hợp lệ"
-            },
-            "assign-service-package-to-customer-success": "Gán gói dịch vụ cho khách hàng thành công",
-            "assign-service-package-to-customer-fail": "Gán gói dịch vụ cho khách hàng thất bại",
-            "remove-assign-success": "Bỏ gán gói dịch vụ cho khách hàng thành công",
-            "remove-assign-fail": "Bỏ gán gói dịch vụ cho khách hàng thất bại",
-            "sure-delete-assign": "Bạn có chắc chắn muốn bỏ gán gói dịch vụ cho khách hàng?"
+
+        "doctor-manage": {
+            "title": "Quản lí bác sỹ",
+
+            "doctor-name": "Chọn bác sỹ",
+            "introductory-information": "Thông tin giới thiệu",
+            "price": "Chọn giá",
+            "payment-method": "Phương thức thanh toán",
+            "city": "Chọn thành phố",
+            "clinic-name": "Tên phòng khám",
+            "clinic-address": "Địa chỉ phòng khám",
+            "note": "Ghi chú"
         }
     }
 }

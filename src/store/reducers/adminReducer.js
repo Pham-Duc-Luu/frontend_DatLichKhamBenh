@@ -14,6 +14,10 @@ const initialState = {
     saveDoctorDetailResponse: {},
     getDoctorDetailByIdResponse: {},
     timeSchedule: [],
+    saveScheduleRes: {},
+    getDailyScheduleRes: {},
+    allCodeRes: {},
+    createBookingRes: {},
 };
 
 const adminReducer = (state = initialState, action) => {
@@ -200,19 +204,19 @@ const adminReducer = (state = initialState, action) => {
          * GET DOCTOR'S DETAIL BY ID
          */
         case actionTypes.GET_DOTOR_BY_ID:
-            console.log('fetch GET_DOTOR_BY_ID ok!', action);
+            // console.log('fetch GET_DOTOR_BY_ID ok!', action);
 
             return {
                 ...state,
             };
         case actionTypes.GET_DOTOR_BY_ID_SUCCESS:
-            console.log('fetch GET_DOTOR_BY_ID_SUCCESS ok!', action);
+            // console.log('fetch GET_DOTOR_BY_ID_SUCCESS ok!', action);
             return {
                 ...state,
                 getDoctorDetailByIdResponse: action.data,
             };
         case actionTypes.GET_DOTOR_BY_ID_FAIL:
-            console.log('fetch GET_DOTOR_BY_ID_FAIL ok!', action);
+            // console.log('fetch GET_DOTOR_BY_ID_FAIL ok!', action);
 
             return {
                 ...state,
@@ -223,24 +227,114 @@ const adminReducer = (state = initialState, action) => {
          * GET SCHEDULE MANAGE
          */
         case actionTypes.GET_SCHEDULE:
-            console.log('fetch GET_SCHEDULE ok!', action);
+            // console.log('fetch GET_SCHEDULE ok!', action);
 
             return {
                 ...state,
             };
         case actionTypes.GET_SCHEDULE_SUCCESS:
-            console.log('fetch GET_SCHEDULE_SUCCESS ok!', action);
+            // console.log('fetch GET_SCHEDULE_SUCCESS ok!', action);
             return {
                 ...state,
-                timeSchedule: action.data.data,
+                timeSchedule: action.data?.data,
             };
         case actionTypes.GET_SCHEDULE_FAIL:
-            console.log('fetch GET_SCHEDULE_FAIL ok!', action);
+            // console.log('fetch GET_SCHEDULE_FAIL ok!', action);
 
             return {
                 ...state,
-                timeSchedule: action.data.data,
+                timeSchedule: action.data?.data,
             };
+
+        /**
+         * SAVE SCHEDULE MANAGE
+         */
+        case actionTypes.SAVE_SCHEDULE:
+            // console.log('fetch SAVE_SCHEDULE ok!', action);
+
+            return {
+                ...state,
+            };
+        case actionTypes.SAVE_SCHEDULE_SUCCESS:
+            // console.log('fetch SAVE_SCHEDULE_SUCCESS ok!', action);
+            return {
+                ...state,
+
+                saveScheduleRes: action.data ? action.data : {},
+            };
+        case actionTypes.SAVE_SCHEDULE_FAIL:
+            // console.log('fetch SAVE_SCHEDULE_FAIL ok!', action);
+            return {
+                ...state,
+                saveScheduleRes: action.data ? action.data : {},
+            };
+
+        /**
+         * GET SCHEDULE
+         */
+        case actionTypes.GET_DAILY_SCHEDULE:
+            // console.log('fetch GET_DAILY_SCHEDULE ok!', action);
+
+            return {
+                ...state,
+            };
+        case actionTypes.GET_DAILY_SCHEDULE_SUCCESS:
+            // console.log('fetch GET_DAILY_SCHEDULE_SUCCESS ok!', action);
+            return {
+                ...state,
+                getDailyScheduleRes: action.data,
+            };
+        case actionTypes.GET_DAILY_SCHEDULE_FAIL:
+            // console.log('fetch GET_DAILY_SCHEDULE_FAIL ok!', action);
+            return {
+                ...state,
+                getDailyScheduleRes: action.data,
+            };
+
+        /**
+         * GET ALLCODE
+         */
+        case actionTypes.ALLCODES_TYPE:
+            // console.log('fetch ALLCODES_TYPE ok!', action);
+
+            return {
+                ...state,
+            };
+        case actionTypes.ALLCODES_TYPE_SUCCESS:
+            // console.log('fetch ALLCODES_TYPE_SUCCESS ok!', initialState.allCodeRes);
+            return {
+                ...state,
+                allCodeRes: action.data,
+            };
+        case actionTypes.ALLCODES_TYPE_FAIL:
+            // console.log('fetch ALLCODES_TYPE_FAIL ok!', action);
+            return {
+                ...state,
+                allCodeRes: action.data,
+            };
+
+        /**
+         * CREATE BOOKING
+         */
+        case actionTypes.CREATE_BOOKING:
+            console.log('fetch CREATE_BOOKING ok!', action);
+
+            return {
+                ...state,
+            };
+        case actionTypes.CREATE_BOOKING_SUCCESS:
+            console.log('fetch CREATE_BOOKING_SUCCESS ok!', action);
+            return {
+                ...state,
+                createBookingRes: action.data,
+            };
+        case actionTypes.CREATE_BOOKING_FAIL:
+            console.log('fetch CREATE_BOOKING_FAIL ok!', action);
+            return {
+                ...state,
+                createBookingRes: action.data,
+            };
+
         default:
             return state;
     }

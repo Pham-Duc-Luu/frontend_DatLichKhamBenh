@@ -4,6 +4,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            gap: 100px;
             .img {
                 width: 120px;
                 height: 120px;
@@ -12,10 +13,19 @@
                 // border: ;
             }
             .info {
+                flex: 1;
+                .name {
+                    font-size: 20px;
+                    font-weight: 700;
+                }
             }
         }
 
         .booking {
+            .date {
+                .dropdown {
+                }
+            }
             .calendar {
                 .booking-title {
                     font-size: 16px;
@@ -30,6 +40,38 @@
                 padding: 0;
                 li {
                     text-align: center;
+                    border-radius: 4px;
+                    width: fit-content;
+                }
+            }
+        }
+    }
+}
+
+.detail-doctor-page-modal {
+    .modal-content {
+        .modal-header {
+            background-color: rgb(224, 110, 110);
+            color: black;
+            height: 100% !important;
+        }
+
+        .info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            .img {
+                width: 120px;
+                height: 120px;
+                object-fit: cover;
+                border-radius: 50000px;
+                // border: ;
+            }
+            .info {
+                flex: 1;
+                .name {
+                    font-size: 20px;
+                    font-weight: 700;
                 }
             }
         }

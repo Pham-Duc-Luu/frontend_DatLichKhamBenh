@@ -39,6 +39,27 @@
             "cardiology": "cardiology",
             "bone": "Department of Orthopedics",
             "traditional-medicine": "traditional medicine"
+        },
+
+        "doctor-page": {
+            "schedule": "The medical examination schedule",
+            "no-schedule": "There are no medical examination schedule",
+            "booking": "book an appointment",
+            "clinic": {
+                "address": "The clinic's address",
+                "price": "The medical examination price",
+                "hide": "hide the price",
+                "show": "show the price",
+                "payment-methods": "The payment methods"
+            },
+            "information": "The medical examination information",
+            "name": "Full name",
+            "phone": "The phone number",
+            "email": "The email address",
+            "address": "The address",
+            "reason": "The reason for examination",
+            "gender": "Your gender",
+            "birth": "Date of birth"
         }
     },
 
@@ -140,55 +161,17 @@
             },
             "sure-delete-user": "Are you sure to delete this user?"
         },
-        "product-manage": {
-            "fail-to-load-foprtype": "Fail to load packages list",
-            "prid": "Package ID",
-            "prname": "Package name",
-            "prtype": "Package type",
-            "status": "Status",
-            "description": "Description",
-            "effective-date": "Effective date",
-            "expiration-date": "Expiration date",
-            "add-product": "Add package",
-            "add-product-success": "Add package successfully",
-            "add-product-fail": "Fail to add package",
-            "edit-product": "Edit package information",
-            "package-decentralize": "Package decentralize",
-            "edit-product-success": "Edit package information successfully",
-            "edit-product-fail": "Fail to edit package information",
-            "delete-product-success": "Delete package successfully",
-            "delete-product-fail": "Fail to delete package",
-            "invalid-input": {
-                "prid": "Please fill in package ID",
-                "prname": "Please fill in package name"
-            },
-            "fail-to-load-decentralize-info": "Fail to load decentralize info",
-            "save-decentralize-success": "Save decentralization successfully",
-            "save-decentralize-fail": "Fail to save decentralization",
-            "sure-delete-package": "Are you sure to delete this package?"
-        },
-        "register-package-group-or-acc": {
-            "assign-service-package-to-customer": "Assign service package to customer",
-            "package-name": "Package name",
-            "assign-type": "Assign type",
-            "cust-acc-group": "Customer/account group",
-            "effective-date": "Effective date",
-            "expiration-date": "Expiration date",
-            "assign": "Assign",
-            "manage-assign-groups": "Manage assign groups",
-            "group-cust-acc-name": "Group/customer account name",
-            "del-assign": "Del assign",
-            "fail-to-load-manage-assign-groups-list": "Fail to load manage assign groups list",
-            "invalid-selected": {
-                "currentfoProduct": "Invalid package",
-                "currentAssignType": "Invalid assign type",
-                "currentFoUser": "Invalid customer/account group"
-            },
-            "assign-service-package-to-customer-success": "Assign service package to customer successfully",
-            "assign-service-package-to-customer-fail": "Fail to assign service package to customer",
-            "remove-assign-success": "Unassign service package to customer successfully",
-            "remove-assign-fail": "Fail to unassign service package to customer",
-            "sure-delete-assign": "Are you sure to unassign service package to customer?"
+
+        "doctor-manage": {
+            "title": "Doctor's manage",
+            "doctor-name": "Choose the doctor",
+            "introductory-information": "Introductory information",
+            "price": "The price",
+            "payment-method": "Payment method",
+            "city": "City",
+            "clinic-name": "Clinic name",
+            "clinic-address": "Clinic address",
+            "note": "Note"
         }
     }
 }

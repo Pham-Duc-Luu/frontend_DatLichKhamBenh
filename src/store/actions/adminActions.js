@@ -9,7 +9,10 @@ import {
     handleGetAllDoctor,
     handleSaveDoctorDetail,
     handleGetDoctorDetailById,
+    handleSavedoctorSchedule,
 } from '../../services/index';
+
+import * as userServices from '../../services/userService';
 
 /**
  * GET GENDEE
@@ -308,4 +311,118 @@ export const getScheduleSuccess = (data) => {
 
 export const getScheduleFail = (data) => {
     return { type: actionTypes.GET_SCHEDULE_FAIL, data };
+};
+
+/**
+ * SAVE MANAGE SCHEDULE
+ */
+
+export const saveDoctorSchedule = (data) => {
+    return async (dispatch, getState) => {
+        try {
+            dispatch({ type: actionTypes.SAVE_SCHEDULE, data: {} });
+            let response = await handleSavedoctorSchedule(data);
+            if (response && response.errCode === 0) {
+                dispatch(saveDoctorScheduleSuccess(response));
+            } else {
+                dispatch(saveDoctorScheduleFail(response));
+            }
+        } catch (e) {
+            dispatch(saveDoctorScheduleFail());
+        }
+    };
+};
+
+export const saveDoctorScheduleSuccess = (data) => {
+    return { type: actionTypes.SAVE_SCHEDULE_SUCCESS, data };
+};
+
+export const saveDoctorScheduleFail = (data) => {
+    return { type: actionTypes.SAVE_SCHEDULE_FAIL, data };
+};
+
+/**
+ * GET DOCTOR SCHEDULE
+ */
+
+export const handleGetDoctorSchedule = (data) => {
+    return async (dispatch, getState) => {
+        try {
+            dispatch({ type: actionTypes.GET_DAILY_SCHEDULE, data: {} });
+            let response = await userServices.handleGetDoctorScheduleById(data);
+            if (response && response.errCode === 0) {
+                dispatch(handleGetDoctorScheduleSuccess(response));
+            } else {
+                dispatch(handleGetDoctorScheduleFail(response));
+            }
+        } catch (e) {
+            dispatch(handleGetDoctorScheduleFail());
+        }
+    };
+};
+
+export const handleGetDoctorScheduleSuccess = (data) => {
+    return { type: actionTypes.GET_DAILY_SCHEDULE_SUCCESS, data };
+};
+
+export const handleGetDoctorScheduleFail = (data) => {
+    return { type: actionTypes.GET_DAILY_SCHEDULE_FAIL, data };
+};
+
+/**
+ * GET SELECTION ITEM
+ */
+
+export const handleGetTypeBykey = (key) => {
+    return async (dispatch, getState) => {
+        try {
+            dispatch({ type: actionTypes.ALLCODES_TYPE, data: {} });
+            let response = await userServices.handleGetAllCode(key);
+            if (response && response.errCode === 0) {
+                dispatch(handleGetTypeBykeySuccess({ ...response, key }));
+            } else {
+                dispatch(handleGetTypeBykeyFail({ ...response, key }));
+            }
+        } catch (e) {
+            dispatch(handleGetTypeBykeyFail());
+        }
+    };
+};
+
+export const handleGetTypeBykeySuccess = (data) => {
+    return { type: actionTypes.ALLCODES_TYPE_SUCCESS, data };
+};
+
+export const handleGetTypeBykeyFail = (data) => {
+    return { type: actionTypes.ALLCODES_TYPE_FAIL, data };
+};
+
+/**
+ * HANDLE CREATE BOOKING
+ */
+
+export const handleCreateBooking = (data) => {
+    return async (dispatch, getState) => {
+        try {
+            dispatch({ type: actionTypes.CREATE_BOOKING, data: {} });
+            let response = await userServices.handleCreateBooking(data);
+            console.log(response);
+            if (response && response.errCode === 0) {
+                dispatch(handleCreateBookingSuccess({ ...response }));
+            } else {
+                dispatch(handleCreateBookingFail({ ...response }));
+            }
+        } catch (e) {
+            console.log(123);
+            dispatch(handleCreateBookingFail());
+        }
+    };
+};
+
+export const handleCreateBookingSuccess = (data) => {
+    return { type: actionTypes.CREATE_BOOKING_SUCCESS, data };
+};
+
+export const handleCreateBookingFail = (data) => {
+    return { type: actionTypes.CREATE_BOOKING_FAIL, data };
 };

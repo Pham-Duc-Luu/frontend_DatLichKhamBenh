@@ -55,7 +55,7 @@ class Doctor extends Component {
     componentDidUpdate(prevProps, prevState, snapshot) {
         if (prevProps.topDoctorRes !== this.props.topDoctorRes) {
             this.setState({
-                doctorArr: this.props.topDoctorRes.data,
+                doctorArr: this.props.topDoctorRes?.data,
             });
         }
     }
@@ -99,7 +99,6 @@ class Doctor extends Component {
                                             className="img-cover"
                                             onClick={() => {
                                                 this.props.history.push(`/detail-doctor/${doctor.id}`);
-                                                console.log(doctor.id);
                                             }}
                                         >
                                             <img src={doctorImgURL} />

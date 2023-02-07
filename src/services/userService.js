@@ -43,3 +43,15 @@ export const handleSaveDoctorDetail = (data) => {
 export const handleGetDoctorDetailById = (id) => {
     return axios.get(`/api/get-doctor-detail-description-by-id?id=${id}`);
 };
+
+export const handleSavedoctorSchedule = (data) => {
+    return axios.post('/api/post-dotor-schedule/bulk-create', data);
+};
+
+export const handleGetDoctorScheduleById = ({ id, date }) => {
+    return axios.get(`/api/get-doctor-schedule-by-id?id=${id}&date=${date}`);
+};
+
+export const handleCreateBooking = (data) => {
+    return axios.post(`/api/create-patient-examination`, data);
+};
